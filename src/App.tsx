@@ -1,47 +1,56 @@
+import styled, { ThemeProvider } from 'styled-components';
+import {
+    ThemeProvider as MuiThemeProvider,
+    StylesProvider,
+} from '@material-ui/core/styles';
+
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Calendar from './pages/Calendar';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 import Timeline from './pages/Timeline';
-import {Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
 import Layout from './components/UI/Layout';
-import { makeStyles } from '@material-ui/core';
+import theme from './theme';
 
-const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    marginTop: 50
-  }
-})
+const Container = styled.div`
+    display: flex;
+    margintop: 50px;
+`;
 
 const App = () => {
-  const classes = useStyles();
-  return (
-    <div className={classes.container}>
-    <Layout />
-    <Switch>
-     <Route path='/timeline' exact>
-       <Timeline />
-     </Route>
-     <Route path='/reports' exact>
-       <Reports />
-     </Route>
-     <Route path='/calendar' exact>
-       <Calendar />
-     </Route>
-     <Route path='/settings' exact>
-       <Settings />
-     </Route>
-     <Route path='/login' exact>
-       <Login />
-     </Route>
-     <Route path='/signup' exact>
-       <Signup />
-     </Route>
-    </Switch>
-    </div>
-  );
-}
+    return (
+        <StylesProvider injectFirst>
+            <MuiThemeProvider theme={theme}>
+                <ThemeProvider theme={theme}>
+                    <Container>
+                        <Layout />
+                        <Switch>
+                            <Route path="/timeline" exact>
+                                <Timeline />
+                            </Route>
+                            <Route path="/reports" exact>
+                                <Reports />
+                            </Route>
+                            <Route path="/calendar" exact>
+                                <Calendar />
+                            </Route>
+                            <Route path="/settings" exact>
+                                <Settings />
+                            </Route>
+                            <Route path="/login" exact>
+                                <Login />
+                            </Route>
+                            <Route path="/signup" exact>
+                                <Signup />
+                            </Route>
+                        </Switch>
+                    </Container>
+                </ThemeProvider>
+            </MuiThemeProvider>
+        </StylesProvider>
+    );
+};
 
 export default App;
