@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Calendar: React.FC = () => {
+const Calendar = () => {
     return (
         <div>
             <h1>This is the Calendar</h1>

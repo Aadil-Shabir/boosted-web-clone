@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Reports: React.FC = () => {
+const Reports = () => {
     return (
         <div>
             <h1>This is the Reports</h1>

@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Timeline: React.FC = () => {
+const Timeline = () => {
     return (
         <div>
             <h1>This is the Timeline</h1>

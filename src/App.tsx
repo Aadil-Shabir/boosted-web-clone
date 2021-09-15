@@ -1,11 +1,10 @@
-import React from 'react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Calendar from './pages/Calendar';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 import Timeline from './pages/Timeline';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom'
 import Layout from './components/UI/Layout';
 import { makeStyles } from '@material-ui/core';
 
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
   }
 })
 
-const App: React.FC = () => {
+const App = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
