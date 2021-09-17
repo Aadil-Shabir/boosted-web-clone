@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import {
   createStyles,
@@ -31,6 +31,7 @@ import {
   Timer,
   Settings
 } from '@material-ui/icons';
+import AuthContext from '../../store/auth-context';
 
 const drawerWidth = 240;
 
@@ -116,6 +117,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Layout: React.FC = () => {
+  const authCtx = useContext(AuthContext);
   const classes = useStyles();
   const history = useHistory();
   const theme = useTheme();
@@ -155,6 +157,19 @@ const Layout: React.FC = () => {
     setOpen(false);
   };
 
+  const loginHandler = () => {
+    history.push('/login');
+  };
+
+  const signupHandler = () => {
+    history.push('/signup');
+  };
+
+  const logoutHandler = () => {
+    authCtx.logout();
+    history.push('/login');
+  };
+
   return (
     <ThemeProvider theme={themer}>
       <div className={classes.root}>
@@ -181,8 +196,21 @@ const Layout: React.FC = () => {
             <Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
               Boosted - Productivity
             </Typography>
-            <Button color="inherit">Login</Button>
-            <Button color="inherit">Signup</Button>
+            {!authCtx.isLoggedIn && (
+              <Button color="inherit" onClick={loginHandler}>
+                Login
+              </Button>
+            )}
+            {!authCtx.isLoggedIn && (
+              <Button color="inherit" onClick={signupHandler}>
+                Signup
+              </Button>
+            )}
+            {authCtx.isLoggedIn && (
+              <Button color="inherit" onClick={logoutHandler}>
+                Logout
+              </Button>
+            )}
           </Toolbar>
         </AppBar>
         <Drawer
