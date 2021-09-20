@@ -1,18 +1,12 @@
 import React from 'react';
 import { Grid, Container, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import TextField from '../UI/Forms-UI/TextField';
 import Button from '../UI/Forms-UI/Button';
-
-const useStyles = makeStyles((theme) => ({
-  formWrapper: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(8),
-    textAlign: 'center'
-  }
-}));
+import { Link } from 'react-router-dom';
+import Bold from '../../bold.png';
+import { formStyles } from './forms.style';
 
 const INITIAL_FORM_STATE = {
   firstName: '',
@@ -40,13 +34,20 @@ const FORM_VALIDATION = Yup.object().shape({
 });
 
 const SignupForm: React.FC = () => {
-  const classes = useStyles();
+  const classes = formStyles();
 
   return (
     <div>
       <Grid container>
         <Grid item xs={12}>
           <Container maxWidth="md">
+            <div className={classes.mainHeader}>
+              <img src={Bold} width="70px" height="70px" />
+              <div>
+                <Typography variant="h2">Boosted</Typography>
+                {/* <Typography variant="h6">Productivity</Typography> */}
+              </div>
+            </div>
             <div className={classes.formWrapper}>
               <Formik
                 initialValues={{
@@ -81,53 +82,71 @@ const SignupForm: React.FC = () => {
                     .then((data) => console.log(data));
                 }}
               >
-                <Form>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <Typography variant="h3">Signup</Typography>
-                    </Grid>
+                <Grid container xs={12}>
+                  <div className={classes.formLayout}>
+                    <Form>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <Typography variant="h5" color="textPrimary">
+                            Sign up for your Account
+                          </Typography>
+                        </Grid>
 
-                    <Grid item xs={6}>
-                      <TextField
-                        name="firstName"
-                        label="First Name"
-                        type="text"
-                      />
-                    </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            name="firstName"
+                            label="First Name"
+                            type="text"
+                          />
+                        </Grid>
 
-                    <Grid item xs={6}>
-                      <TextField
-                        name="lastName"
-                        label="Last Name"
-                        type="text"
-                      />
-                    </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            name="lastName"
+                            label="Last Name"
+                            type="text"
+                          />
+                        </Grid>
 
-                    <Grid item xs={12}>
-                      <TextField
-                        name="email"
-                        label="E-Mail Address"
-                        type="email"
-                      />
-                    </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            name="email"
+                            label="E-Mail Address"
+                            type="email"
+                          />
+                        </Grid>
 
-                    <Grid item xs={12}>
-                      <TextField name="phone" label="Ph#" type="integer" />
-                    </Grid>
+                        <Grid item xs={12}>
+                          <TextField name="phone" label="Ph#" type="integer" />
+                        </Grid>
 
-                    <Grid item xs={12}>
-                      <TextField
-                        name="password"
-                        label="Password"
-                        type="password"
-                      />
-                    </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            name="password"
+                            label="Password"
+                            type="password"
+                          />
+                        </Grid>
 
-                    <Grid item xs={12}>
-                      <Button>Signup</Button>
-                    </Grid>
-                  </Grid>
-                </Form>
+                        <Grid item xs={12}>
+                          <Button>Signup</Button>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <Link to="/login" className={classes.switch}>
+                            Already Have an Account? | Log In
+                          </Link>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <Link to="/" className={classes.switch}>
+                            Home
+                          </Link>
+                        </Grid>
+                      </Grid>
+                    </Form>
+                  </div>
+                </Grid>
               </Formik>
             </div>
           </Container>

@@ -1,20 +1,14 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Grid, Container, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import TextField from '../UI/Forms-UI/TextField';
 import Button from '../UI/Forms-UI/Button';
 import AuthContext from '../../store/auth-context';
-
-const useStyles = makeStyles((theme) => ({
-  formWrapper: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(8),
-    textAlign: 'center'
-  }
-}));
+import { Link } from 'react-router-dom';
+import { formStyles } from './forms.style';
+import Bold from '../../bold.png';
 
 const INITIAL_FORM_STATE = {
   email: '',
@@ -29,13 +23,18 @@ const FORM_VALIDATION = Yup.object().shape({
 const LoginForm: React.FC = () => {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
-  const classes = useStyles();
+  const classes = formStyles();
 
   return (
     <div>
       <Grid container>
         <Grid item xs={12}>
           <Container maxWidth="md">
+            <div className={classes.mainHeader}>
+              <img src={Bold} width="70px" height="70px" />
+              <Typography variant="h2">Boosted</Typography>
+              {/* <Typography variant="h6">Productivity</Typography> */}
+            </div>
             <div className={classes.formWrapper}>
               <Formik
                 initialValues={{
@@ -76,33 +75,54 @@ const LoginForm: React.FC = () => {
                     });
                 }}
               >
-                <Form>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <Typography variant="h3">Login</Typography>
-                    </Grid>
+                <Grid container xs={12}>
+                  {/* <div>
+                    <Test />
+                  </div> */}
+                  <div className={classes.formLayout}>
+                    <Form>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <Typography variant="h5" color="textPrimary">
+                            Log in to Boosted
+                          </Typography>
+                        </Grid>
 
-                    <Grid item xs={12}>
-                      <TextField
-                        name="email"
-                        label="E-Mail Address"
-                        type="email"
-                      />
-                    </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            name="email"
+                            label="E-Mail Address"
+                            type="email"
+                          />
+                        </Grid>
 
-                    <Grid item xs={12}>
-                      <TextField
-                        name="password"
-                        label="Password"
-                        type="password"
-                      />
-                    </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            name="password"
+                            label="Password"
+                            type="password"
+                          />
+                        </Grid>
 
-                    <Grid item xs={12}>
-                      <Button>Login</Button>
-                    </Grid>
-                  </Grid>
-                </Form>
+                        <Grid item xs={12}>
+                          <Button>Login</Button>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <Link to="/signup" className={classes.switch}>
+                            Don&apos;t Have an Account? | Signup
+                          </Link>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <Link to="/" className={classes.switchi}>
+                            &lt; Go Back
+                          </Link>
+                        </Grid>
+                      </Grid>
+                    </Form>
+                  </div>
+                </Grid>
               </Formik>
             </div>
           </Container>
