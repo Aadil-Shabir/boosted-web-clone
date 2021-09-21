@@ -1,29 +1,66 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Grid, Container, Typography } from '@material-ui/core';
+import React, {useContext} from 'react';
+import {useHistory} from 'react-router-dom';
+import {Grid, Container, Typography} from '@material-ui/core';
 import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
-import TextField from '../UI/Forms-UI/TextField';
-import Button from '../UI/Forms-UI/Button';
+import {Formik, Form} from 'formik';
+import TextField from '../../components/UI/FormTextField';
+import Button from '../../components/UI/FormButton';
 import AuthContext from '../../store/auth-context';
-import { Link } from 'react-router-dom';
-import { formStyles } from './forms.style';
+import {Link} from 'react-router-dom';
+import {formStyles} from '../../components/UI/styles/forms.style';
 import Bold from '../../bold.png';
 
 const INITIAL_FORM_STATE = {
   email: '',
-  password: ''
+  password: '',
 };
 
 const FORM_VALIDATION = Yup.object().shape({
   email: Yup.string().email('Invalid email.').required('Required'),
-  password: Yup.string().required('Required')
+  password: Yup.string().required('Required'),
 });
 
 const LoginForm: React.FC = () => {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
   const classes = formStyles();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submitHandler = (values: any) => {
+    {
+      fetch(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBKUadWbfl-g3mGKyg8RY8cvnGpCKnh8oI',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+            returnSecureToken: true,
+          }),
+          headers: {
+            'Content-type': 'application/json',
+          },
+        },
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            return res.json().then(() => {
+              const errorMessage = 'Authentication Failed';
+              throw new Error(errorMessage);
+            });
+          }
+        })
+        .then((data) => {
+          authCtx.login(data.idToken);
+          history.push('/timeline');
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
+  };
 
   return (
     <div>
@@ -33,52 +70,16 @@ const LoginForm: React.FC = () => {
             <div className={classes.mainHeader}>
               <img src={Bold} width="70px" height="70px" />
               <Typography variant="h2">Boosted</Typography>
-              {/* <Typography variant="h6">Productivity</Typography> */}
             </div>
             <div className={classes.formWrapper}>
               <Formik
                 initialValues={{
-                  ...INITIAL_FORM_STATE
+                  ...INITIAL_FORM_STATE,
                 }}
                 validationSchema={FORM_VALIDATION}
-                onSubmit={(values) => {
-                  fetch(
-                    'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBKUadWbfl-g3mGKyg8RY8cvnGpCKnh8oI',
-                    {
-                      method: 'POST',
-                      body: JSON.stringify({
-                        email: values.email,
-                        password: values.password,
-                        returnSecureToken: true
-                      }),
-                      headers: {
-                        'Content-type': 'application/json'
-                      }
-                    }
-                  )
-                    .then((res) => {
-                      if (res.ok) {
-                        return res.json();
-                      } else {
-                        return res.json().then(() => {
-                          const errorMessage = 'Authentication Failed';
-                          throw new Error(errorMessage);
-                        });
-                      }
-                    })
-                    .then((data) => {
-                      authCtx.login(data.idToken);
-                      history.push('/timeline');
-                    })
-                    .catch((err) => {
-                      alert(err.message);
-                    });
-                }}
+                onSubmit={(values) => submitHandler(values)}
               >
-                <Grid container xs={12}>
-                  {/* <div>
-                    <Test />
-                  </div> */}
+                <Grid item xs={12}>
                   <div className={classes.formLayout}>
                     <Form>
                       <Grid container spacing={2}>

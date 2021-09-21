@@ -1,19 +1,19 @@
 import React from 'react';
-import { Grid, Container, Typography } from '@material-ui/core';
+import {Grid, Container, Typography} from '@material-ui/core';
 import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
-import TextField from '../UI/Forms-UI/TextField';
-import Button from '../UI/Forms-UI/Button';
-import { Link } from 'react-router-dom';
+import {Formik, Form} from 'formik';
+import TextField from '../../components/UI/FormTextField';
+import Button from '../../components/UI/FormButton';
+import {Link} from 'react-router-dom';
 import Bold from '../../bold.png';
-import { formStyles } from './forms.style';
+import {formStyles} from '../../components/UI/styles/forms.style';
 
 const INITIAL_FORM_STATE = {
   firstName: '',
   lastName: '',
   email: '',
   phone: '',
-  password: ''
+  password: '',
 };
 
 const FORM_VALIDATION = Yup.object().shape({
@@ -30,11 +30,46 @@ const FORM_VALIDATION = Yup.object().shape({
     .required('Required')
     .typeError('Please enter a valid phone number')
     .integer(),
-  password: Yup.string().required('Required')
+  password: Yup.string().required('Required'),
 });
 
 const SignupForm: React.FC = () => {
   const classes = formStyles();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submitHandler = (values: any) => {
+    {
+      fetch(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBKUadWbfl-g3mGKyg8RY8cvnGpCKnh8oI',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+            returnSecureToken: true,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            return res.json().then((data) => {
+              let errorMessage = 'Authentication Failed';
+              if (data && data.error && data.error.message) {
+                errorMessage = data.error.message;
+              }
+              throw new Error(errorMessage);
+            });
+          }
+        })
+        .then((data) => console.log(data))
+        .catch((err) => alert(err.message));
+    }
+  };
 
   return (
     <div>
@@ -45,44 +80,17 @@ const SignupForm: React.FC = () => {
               <img src={Bold} width="70px" height="70px" />
               <div>
                 <Typography variant="h2">Boosted</Typography>
-                {/* <Typography variant="h6">Productivity</Typography> */}
               </div>
             </div>
             <div className={classes.formWrapper}>
               <Formik
                 initialValues={{
-                  ...INITIAL_FORM_STATE
+                  ...INITIAL_FORM_STATE,
                 }}
                 validationSchema={FORM_VALIDATION}
-                onSubmit={(values) => {
-                  fetch(
-                    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBKUadWbfl-g3mGKyg8RY8cvnGpCKnh8oI',
-                    {
-                      method: 'POST',
-                      body: JSON.stringify({
-                        email: values.email,
-                        password: values.password,
-                        returnSecureToken: true
-                      }),
-                      headers: {
-                        'Content-Type': 'application/json'
-                      }
-                    }
-                  )
-                    .then((res) => {
-                      if (res.ok) {
-                        return res.json();
-                      } else {
-                        return res.json().then(() => {
-                          const errorMessage = 'Authentication Failed';
-                          throw new Error(errorMessage);
-                        });
-                      }
-                    })
-                    .then((data) => console.log(data));
-                }}
+                onSubmit={(values) => submitHandler(values)}
               >
-                <Grid container xs={12}>
+                <Grid item xs={12}>
                   <div className={classes.formLayout}>
                     <Form>
                       <Grid container spacing={2}>
