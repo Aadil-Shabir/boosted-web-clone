@@ -1,6 +1,12 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, makeStyles } from '@material-ui/core';
 import { useField } from 'formik';
+
+const useStyles = makeStyles({
+  textfields: {
+    width: '90%'
+  }
+});
 
 const TextfieldWrapper: React.FC<{
   name: string;
@@ -8,6 +14,7 @@ const TextfieldWrapper: React.FC<{
   type: string;
 }> = ({ name, ...otherProps }) => {
   const [field, mata] = useField(name);
+  const classes = useStyles();
 
   const configTextField: {
     fullWidth: boolean;
@@ -26,7 +33,13 @@ const TextfieldWrapper: React.FC<{
     configTextField.helperText = mata.error;
   }
 
-  return <TextField variant="outlined" {...configTextField} />;
+  return (
+    <TextField
+      className={classes.textfields}
+      variant="outlined"
+      {...configTextField}
+    />
+  );
 };
 
 export default TextfieldWrapper;

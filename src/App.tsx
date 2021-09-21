@@ -17,6 +17,11 @@ const theme = createTheme({
       main: '#33ffad'
     }
   }
+  // typography: {
+  //   h2: {
+  //     fontFamily: 'Train One'
+  //   }
+  // }
 });
 
 const useStyles = makeStyles({

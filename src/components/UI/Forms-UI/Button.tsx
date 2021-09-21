@@ -1,9 +1,17 @@
 import React from 'react';
-import { Button as ButtonMui } from '@material-ui/core';
+import { Button as ButtonMui, makeStyles } from '@material-ui/core';
 import { useFormikContext } from 'formik';
+
+const useStyles = makeStyles({
+  btn: {
+    width: '90%',
+    height: '3.4rem'
+  }
+});
 
 const Button: React.FC = ({ children }) => {
   const { submitForm } = useFormikContext();
+  const classes = useStyles();
 
   const handleSubmit = () => {
     submitForm();
@@ -15,7 +23,12 @@ const Button: React.FC = ({ children }) => {
   };
 
   return (
-    <ButtonMui color="primary" variant="contained" {...configButton}>
+    <ButtonMui
+      color="primary"
+      variant="contained"
+      className={classes.btn}
+      {...configButton}
+    >
       {children}
     </ButtonMui>
   );
