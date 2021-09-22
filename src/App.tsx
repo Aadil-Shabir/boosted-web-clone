@@ -1,22 +1,22 @@
 import React from 'react';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from './pages/login/index';
+import Signup from './pages/signup/index';
 import Calendar from './pages/Calendar';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 import Timeline from './pages/Timeline';
-import { createTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { Route, Switch } from 'react-router-dom';
+import {createTheme} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/styles';
+import {Route, Switch} from 'react-router-dom';
 import Layout from './components/UI/Layout/Layout';
-import { makeStyles } from '@material-ui/core';
+import {makeStyles} from '@material-ui/core';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#33ffad'
-    }
-  }
+      main: '#33ffad',
+    },
+  },
   // typography: {
   //   h2: {
   //     fontFamily: 'Train One'
@@ -27,8 +27,8 @@ const theme = createTheme({
 const useStyles = makeStyles({
   container: {
     display: 'flex',
-    marginTop: 50
-  }
+    marginTop: 50,
+  },
 });
 
 const App: React.FC = () => {

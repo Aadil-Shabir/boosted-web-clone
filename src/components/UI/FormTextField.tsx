@@ -1,18 +1,18 @@
 import React from 'react';
-import { TextField, makeStyles } from '@material-ui/core';
-import { useField } from 'formik';
+import {TextField, makeStyles} from '@material-ui/core';
+import {useField} from 'formik';
 
 const useStyles = makeStyles({
   textfields: {
-    width: '90%'
-  }
+    width: '90%',
+  },
 });
 
 const TextfieldWrapper: React.FC<{
   name: string;
   label: string;
   type: string;
-}> = ({ name, ...otherProps }) => {
+}> = ({name, ...otherProps}) => {
   const [field, mata] = useField(name);
   const classes = useStyles();
 
@@ -25,7 +25,7 @@ const TextfieldWrapper: React.FC<{
     ...otherProps,
     fullWidth: true,
     error: false,
-    helperText: ''
+    helperText: '',
   };
 
   if (mata && mata.touched && mata.error) {
