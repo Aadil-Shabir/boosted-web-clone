@@ -29,7 +29,7 @@ const LoginForm: React.FC = () => {
   const submitHandler = (values: any) => {
     {
       fetch(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBKUadWbfl-g3mGKyg8RY8cvnGpCKnh8oI',
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBKUadWbfl-g3mGKyg8RY8cvnGpCKnh8oI',
         {
           method: 'POST',
           body: JSON.stringify({
@@ -54,7 +54,7 @@ const LoginForm: React.FC = () => {
         })
         .then((data) => {
           authCtx.login(data.idToken);
-          history.push('/timeline');
+          history.replace('/timeline');
         })
         .catch((err) => {
           alert(err.message);
