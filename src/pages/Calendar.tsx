@@ -1,11 +1,8 @@
 import React from 'react';
+import Sheduler from '../components/calendar/Sheduler';
 
 const Calendar: React.FC = () => {
-    return (
-        <div>
-            <h1>This is the Calendar</h1>
-        </div>
-    )
-}
+  return <Sheduler />;
+};
 
 export default Calendar;
