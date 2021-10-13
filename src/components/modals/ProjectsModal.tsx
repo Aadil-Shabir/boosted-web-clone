@@ -3,7 +3,7 @@ import {Backdrop, Box, Modal, Fade, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import TimelineContext from '../../store/timeline-context';
 import ProjectsChildModal from './ProjectsChildModal';
-import NewProjectList from '../projects/NewProjectList';
+import NewProjectList from '../../pages/timeline/NewProjectList';
 
 const style = {
   position: 'absolute' as const,
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TransitionsModal: React.FC = () => {
+const ProjectsModal: React.FC = () => {
   const classes = useStyles();
   const tmCtx = useContext(TimelineContext);
 
@@ -61,4 +61,4 @@ const TransitionsModal: React.FC = () => {
   );
 };
 
-export default TransitionsModal;
+export default ProjectsModal;

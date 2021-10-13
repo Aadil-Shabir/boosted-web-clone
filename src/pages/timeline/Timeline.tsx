@@ -1,5 +1,5 @@
 import React from 'react';
-import TimelineUI from '../components/timeline/Timeline-UI';
+import TimelineUI from './Timeline-UI';
 
 const Timeline: React.FC = () => {
   return (

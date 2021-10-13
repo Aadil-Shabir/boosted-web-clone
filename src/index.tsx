@@ -7,17 +7,20 @@ import {AuthContextProvider} from './store/auth-context';
 import {LayoutContextProvider} from './store/layout-context';
 import {ChildModalContextProvider} from './store/childModal-context';
 import {TimelineContextProvider} from './store/timeline-context';
+import {ProjectContextProvider} from './store/project-context';
 
 ReactDOM.render(
   <LayoutContextProvider>
     <TimelineContextProvider>
-      <AuthContextProvider>
-        <ChildModalContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ChildModalContextProvider>
-      </AuthContextProvider>
+      <ProjectContextProvider>
+        <AuthContextProvider>
+          <ChildModalContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ChildModalContextProvider>
+        </AuthContextProvider>
+      </ProjectContextProvider>
     </TimelineContextProvider>
   </LayoutContextProvider>,
   document.getElementById('root'),

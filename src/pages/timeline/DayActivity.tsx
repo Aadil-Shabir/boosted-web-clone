@@ -1,6 +1,6 @@
 import React from 'react';
 import {Typography, makeStyles, Button, Divider} from '@material-ui/core';
-import ColorButtons from '../projects/ColorButtons';
+import ColorButtons from '../../components/projects/ColorButtons';
 import Timer from 'react-compound-timer';
 import {PlayArrow} from '@material-ui/icons';
 

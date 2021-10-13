@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Typography, makeStyles, Grid, Button} from '@material-ui/core';
 import styled from 'styled-components';
 import {ArrowDropDownSharp} from '@material-ui/icons';
-import TransitionsModal from '../modals/ProjectsModal';
+import ProjectsModal from '../../components/modals/ProjectsModal';
 import ProjectTimer from './ProjectTimer';
 import ProductivityLog from './ProductivityLog';
 import TimelineContext from '../../store/timeline-context';
@@ -22,10 +22,11 @@ const LogContainer = styled.div`
 
 const useStyles = makeStyles({
   heading: {
-    fontSize: '5rem',
-    fontFamily: "'Gemunu Libre', Sans-serif",
-    textShadow: '3px 3px #d6f5d6',
+    fontSize: '4rem',
+    fontFamily: "'Lato', sans-serif",
+    textShadow: '1px 1px black',
     marginBottom: '0.8rem',
+    color: 'black',
   },
   btn: {
     padding: '8px 20px',
@@ -52,7 +53,7 @@ const TimelineUI: React.FC = () => {
       <ContentWrapper>
         <Grid container>
           <Grid item xs={12}>
-            <TransitionsModal />
+            <ProjectsModal />
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h2" className={classes.heading}>

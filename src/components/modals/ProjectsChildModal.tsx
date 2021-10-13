@@ -1,6 +1,13 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import NewProjectButton from '../projects/NewProjectButton';
-import {Modal, Box, Button, makeStyles, TextField} from '@material-ui/core';
+import {
+  Modal,
+  Box,
+  Button,
+  makeStyles,
+  TextField,
+  Backdrop,
+} from '@material-ui/core';
 import ColorButtons from '../projects/ColorButtons';
 import {ProjectBackgroundColor} from '../projects/NewProjectBgColor';
 import ChildModalContext from '../../store/childModal-context';
@@ -48,6 +55,7 @@ const useStyles = makeStyles({
 const ChildModal: React.FC = () => {
   const cmCtx = useContext(ChildModalContext);
   const [open, setOpen] = React.useState(false);
+  const [value, setValue] = useState('');
   const classes = useStyles();
 
   const handleOpen = () => {
@@ -57,12 +65,22 @@ const ChildModal: React.FC = () => {
     setOpen(false);
   };
 
+  const saveHandler = () => {
+    console.log(value);
+    console.log(cmCtx.titleBtnColor);
+    console.log(Date.now());
+  };
+
   return (
     <React.Fragment>
       <NewProjectButton handleOpen={handleOpen} />
 
       <Modal
-        hideBackdrop
+        // hideBackdrop
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
         open={open}
         onClose={handleClose}
         aria-labelledby="child-modal-title"
@@ -80,6 +98,8 @@ const ChildModal: React.FC = () => {
                   className: classes.floatingLabelFocusStyle,
                 }}
                 inputProps={{className: classes.input}}
+                onChange={(e) => setValue(e.target.value)}
+                value={value}
               />
             </div>
           </ProjectBackgroundColor>
@@ -98,7 +118,7 @@ const ChildModal: React.FC = () => {
             <ColorButtons.PacificButton onClick={cmCtx.pacificColor} />
           </div>
           <div className={classes.actionBtn}>
-            <Button>Save</Button>
+            <Button onClick={saveHandler}>Save</Button>
             <Button onClick={handleClose}>Cancel</Button>
           </div>
         </Box>

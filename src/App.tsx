@@ -4,7 +4,8 @@ import Signup from './pages/signup/index';
 import Calendar from './pages/Calendar';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
-import Timeline from './pages/Timeline';
+import Timeline from './pages/timeline/Timeline';
+import Project from './pages/project/Project';
 import {createTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
 import {Route, Switch, Redirect} from 'react-router-dom';
@@ -55,6 +56,11 @@ const App: React.FC = () => {
             {authCtx.isLoggedIn && (
               <Route path="/timeline" exact>
                 <Timeline />
+              </Route>
+            )}
+            {authCtx.isLoggedIn && (
+              <Route path="/project" exact>
+                <Project />
               </Route>
             )}
             {authCtx.isLoggedIn && (

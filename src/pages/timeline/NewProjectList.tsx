@@ -2,8 +2,8 @@ import React, {useContext} from 'react';
 import {makeStyles, Grid} from '@material-ui/core';
 import styled from 'styled-components';
 import Timer from 'react-compound-timer';
-import StartButton from '../Timer/StartTimerButton';
-import ColorButtons from './ColorButtons';
+import StartButton from '../../components/Timer/StartTimerButton';
+import ColorButtons from '../../components/projects/ColorButtons';
 import TimelineContext from '../../store/timeline-context';
 
 const DUMMY_DATA = [

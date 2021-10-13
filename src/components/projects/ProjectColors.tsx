@@ -1,18 +1,18 @@
 const Colors = {
   red: {
-    btnRed: 'red',
+    btnRed: '#FF0000',
     bgRed: '#941B0C',
   },
   orange: {
-    btnOrange: 'orange',
+    btnOrange: '#FFA500',
     bgOrange: '#bc3908',
   },
   pink: {
-    btnPink: 'pink',
+    btnPink: '#FFC0CB',
     bgPink: '#9E7682',
   },
   yellow: {
-    btnYellow: 'yellow',
+    btnYellow: '#FFFF00',
     bgYellow: '#F0A202',
   },
   skyblue: {
@@ -20,7 +20,7 @@ const Colors = {
     bgSkyBlue: '#56A3A6',
   },
   blue: {
-    btnBlue: 'blue',
+    btnBlue: '#0000FF',
     bgBlue: '#002642',
   },
   viridian: {
@@ -28,7 +28,7 @@ const Colors = {
     bgViridian: '#0C7C59',
   },
   green: {
-    btnGreen: 'green',
+    btnGreen: '#008000',
     bgGreen: '#18FF6D',
   },
   lightPurple: {
@@ -36,7 +36,7 @@ const Colors = {
     bgLightPurple: '#647AA3',
   },
   purple: {
-    btnPurple: 'purple',
+    btnPurple: '#A020F0',
     bgPurple: '#B370B0',
   },
   lightGreen: {

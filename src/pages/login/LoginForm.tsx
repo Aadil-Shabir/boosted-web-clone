@@ -53,7 +53,8 @@ const LoginForm: React.FC = () => {
           }
         })
         .then((data) => {
-          authCtx.login(data.idToken);
+          authCtx.login(data.idToken, data.localId);
+          // authCtx.login(data.localId);
           history.replace('/timeline');
         })
         .catch((err) => {
