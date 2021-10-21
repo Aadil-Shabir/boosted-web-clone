@@ -23,7 +23,7 @@ const LogContainer = styled.div`
 const useStyles = makeStyles({
   heading: {
     fontSize: '4rem',
-    fontFamily: "'Lato', sans-serif",
+    fontFamily: 'Train One',
     textShadow: '1px 1px black',
     marginBottom: '0.8rem',
     color: 'black',

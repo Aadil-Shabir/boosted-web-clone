@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import Login from './pages/login/index';
 import Signup from './pages/signup/index';
 import Calendar from './pages/Calendar';
-import Reports from './pages/Reports';
+import Reports from './pages/reports/Reports';
 import Settings from './pages/Settings';
 import Timeline from './pages/timeline/Timeline';
 import Project from './pages/project/Project';
@@ -20,10 +20,16 @@ const theme = createTheme({
     primary: {
       main: '#33ffad',
     },
+    secondary: {
+      main: '#0000FF',
+    },
   },
   typography: {
     h5: {
       fontSize: '1.5rem',
+    },
+    h6: {
+      fontSize: '1rem',
     },
   },
 });
