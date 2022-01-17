@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import axios from 'axios'
-import $ from 'jquery'; 
 
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -10,9 +9,6 @@ import AddOperator from '../pages/AddOperator';
 import OperatorContext from '../store/OperatorStore';
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
   } from "react-router-dom";
 
@@ -37,6 +33,11 @@ useEffect(() => {
         console.log(error)
     }
 }, [])
+
+    const rowClickHandler = (e) => {
+        console.log(e)
+        opCtx.openModalWithData(e)
+    }
 
 return (
     
@@ -71,7 +72,8 @@ return (
                     <div style={{marginLeft:"3%" ,marginTop:"2%"}}> 
                     <div className="ag-theme-alpine" style={{height: 300, width: 850}}>
            <AgGridReact
-               rowData={rowData}>
+               rowData={rowData}
+               onRowClicked={rowClickHandler}>
                <AgGridColumn field="id" sortable={true} filter={true} checkboxSelection={true}></AgGridColumn>
                <AgGridColumn field="name" sortable={true} filter={true}></AgGridColumn>
                <AgGridColumn field="country" sortable={true} filter={true}></AgGridColumn>

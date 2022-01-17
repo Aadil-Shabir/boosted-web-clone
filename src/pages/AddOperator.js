@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 
 import OperatorContext from '../store/OperatorStore';
 
@@ -11,16 +11,31 @@ const AddOperator = () => {
 
     const opCtx = useContext(OperatorContext);
 
+    useEffect(() => {
+            setNameValue(opCtx.value.name);
+            setCodeValue(opCtx.value.code);
+            setCountryValue(opCtx.value.country);
+            setImageValue(opCtx.value.image)
+        
+
+    }, [opCtx.value.name, opCtx.value.code, opCtx.value.country, opCtx.value.image])
+
+
     const createOperator = () => {
-        axios.post('http://127.0.0.1:8000/api/admin/operator', {
+
+        try {
+            axios.post('http://127.0.0.1:8000/api/admin/operator', {
             name: nameValue,
             code: codeValue,
             country: countryValue,
             image: imageValue
         }).then((response) => {
             console.log(response)
-        })
-    }
+        });
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
     return (
         <div className="row" data-keyboard="false" data-backdrop="static">
@@ -39,7 +54,7 @@ const AddOperator = () => {
 
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>
                    
-                    <input type="text" className="form-control" id="inputEmail4" placeholder="" onChange={(e) => setNameValue(e.target.value)} />
+                    <input type="text" className="form-control" id="inputEmail4" placeholder="" onChange={(e) => setNameValue(e.target.value)} value={nameValue} />
                 </div>
             </div>
 
@@ -53,7 +68,7 @@ const AddOperator = () => {
 
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>
                    
-                    <input type="text" className="form-control" id="inputEmail4" placeholder="" onChange={(e) => setCodeValue(e.target.value)} />
+                    <input type="text" className="form-control" id="inputEmail4" placeholder="" onChange={(e) => setCodeValue(e.target.value)} value={codeValue}  />
                 </div>
             </div>
 
@@ -66,7 +81,7 @@ const AddOperator = () => {
 
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>
                    
-                    <input type="text" className="form-control" id="inputEmail4" placeholder="" onChange={(e) => setCountryValue(e.target.value)} />
+                    <input type="text" className="form-control" id="inputEmail4" placeholder="" onChange={(e) => setCountryValue(e.target.value)} value={countryValue}  />
                 </div>
             </div>
 
@@ -79,7 +94,7 @@ const AddOperator = () => {
 
                 <div className="form-group col-md-6" style ={{display:"flex",flexDirection:"row"}}>
                    
-                    <input type="text" className="form-control" id="inputEmail4" placeholder="" onChange={(e) => setImageValue(e.target.value)} />
+                    <input type="text" className="form-control" id="inputEmail4" placeholder="" onChange={(e) => setImageValue(e.target.value)} value={imageValue}  />
                 </div>
 
             </div>
