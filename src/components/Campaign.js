@@ -1,24 +1,21 @@
-import Clientsdata from '../pages/Clientsdata';
+import React, { useState, useEffect, useContext } from 'react'
 import AddCampaign from '../pages/AddCampaign';
-import Campaignsdata from '../pages/Campaignsdata';
-import React, { useState, useEffect } from 'react'
 
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 
+import CampaignContext from '../store/CampaignStore';
 
 import axios from 'axios'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
   } from "react-router-dom";
 
   
 const Campaign = () => {
+    const camCtx = useContext(CampaignContext);
 
 const [overlay, setOverlay] = useState(false)
 const [rowData, setRowData] = useState([]);
@@ -38,6 +35,10 @@ useEffect(() => {
     }
 }, [])
 
+    const rowClickHandler = (e) => {
+        console.log(e);
+        camCtx.openModalWithData(e);
+    }
 
 return (
     
@@ -57,7 +58,7 @@ return (
                 <div  style={{background:"white",height:"10%",width:"98%",display:"flex",flexDirection:"row"}}>    
                     <p style={{fontSize: "25px" , fontWeight:"bold",marginLeft:"2%" ,marginTop:"1rem"}}> Campaign</p>
                     <div style={{fontSize: "25px" ,marginTop:"1rem", fontWeight:"bold",float:"right" ,marginLeft:"75%" }}>  
-                    <button onClick={()=> setOverlay(true)} class="btn btn-default"> <i class="bi bi-plus-square"></i>&nbsp;Add new Campaign</button></div>
+                    <button onClick={camCtx.openModal} class="btn btn-default"> <i class="bi bi-plus-square"></i>&nbsp;Add new Campaign</button></div>
                 </div>
                 <div  style={{background:"white",marginTop:"2%",marginLeft:"1%" ,height:"45%",width:"96%",display:"flex",flexDirection:"row"}}>
                     <div style={{marginLeft:"3%" ,marginTop:"2%"}}> 
@@ -65,7 +66,9 @@ return (
 
                     <div className="ag-theme-alpine" style={{height: 300, width: 950}}>
            <AgGridReact
-               rowData={rowData}>
+               rowData={rowData}
+               onRowClicked={rowClickHandler}
+               >
                <AgGridColumn field="id" sortable={true} filter={true} checkboxSelection={true}></AgGridColumn>
                <AgGridColumn field="operator" sortable={true} filter={true}></AgGridColumn>
                <AgGridColumn field="company" sortable={true} filter={true}></AgGridColumn>
@@ -80,7 +83,7 @@ return (
                 </div>
             </div>
         </div>
-        {overlay ? <div className="overlay" onClick={() => setOverlay(false)}>
+        {camCtx.overlay ? <div className="overlay">
                 <div className="overlay-sidebar">
                     <AddCampaign></AddCampaign>
                 </div>

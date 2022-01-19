@@ -1,12 +1,9 @@
+import React from 'react';
 import Clientsdata from '../pages/Clientsdata';
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
   } from "react-router-dom";
-import GridExample from '../pages/GridExample';
 
 const Client = () => {
   return (

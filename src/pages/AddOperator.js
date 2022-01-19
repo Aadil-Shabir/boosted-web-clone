@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, {useContext, useState, useEffect} from 'react';
+import axios from 'axios';
 
 import OperatorContext from '../store/OperatorStore';
 
@@ -23,13 +23,19 @@ const AddOperator = () => {
 
     const createOperator = () => {
 
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+
         try {
-            axios.post('http://127.0.0.1:8000/api/admin/operator', {
+            axios.post('https://dev.digitalizehub.com/api/admin/operators', {
+            operator_id: '25',
             name: nameValue,
             code: codeValue,
-            country: countryValue,
-            image: imageValue
-        }).then((response) => {
+            country_id: countryValue,
+        }, config).then((response) => {
             console.log(response)
         });
         } catch (error) {
@@ -110,7 +116,7 @@ const AddOperator = () => {
                    
                <button type="button" class="btn btn-outline" onClick={opCtx.closeModal}> &nbsp;Cancel</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-success" onClick={createOperator()}> &nbsp;Create</button>
+                    <button type="button" class="btn btn-success" onClick={createOperator}> &nbsp;Create</button>
                 </div>
 
             </div>

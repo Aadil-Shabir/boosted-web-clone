@@ -7,7 +7,7 @@ import {
   } from "react-router-dom";
 
   
-const Header = () =>{
+const Header = () => {
     return (
         <div>
             <nav class="navbar navbar-expand-lg navbar-custom">
@@ -23,6 +23,6 @@ const Header = () =>{
         
         </div>
     )
-}
+};
 
 export default Header;
