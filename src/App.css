@@ -38,14 +38,6 @@
   background-color: #9cdf44;
 }
 
-.client-box {
-  background: "white";
-  height: "7rem";
-  width: "82vw";
-  display: "flex";
-  flex-direction: "row";
-}
-
 body {
   overflow-y: hidden;
   overflow-x: hidden;
