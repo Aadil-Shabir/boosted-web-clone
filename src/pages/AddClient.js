@@ -1,14 +1,14 @@
-import ClientForm from "./ClientForm";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-import NewClientForm from "./NewClientForm";
+import { Link } from "react-router-dom";
 
-import React, { Component , useState} from 'react';
+import {makeStyles} from "@mui/styles";
+
+import React, {useState} from 'react';
 import axios from 'axios';
+
+const useStyles = makeStyles((theme) => ({
+    
+}))
+
 const AddClient = () => {
     const [req, setReq] = useState({
         operator_id: '',
@@ -24,9 +24,6 @@ const AddClient = () => {
         service_code_campaign: '',
         service_code:'',
         client_id:'26'
-
-        
-        
     })
 
 
@@ -66,8 +63,8 @@ const AddClient = () => {
             <div class="col-2">
             <div class="vertical-nav bg-white" id="sidebar">
                 <ul class="nav flex-column bg-white mb-0">
-                <li class="nav-item"><Link to="/" class="nav-link text-dark font-italic  "><i class="bi bi-list-ul"></i> &nbsp; &nbsp; &nbsp; All Clients</Link></li>
-                <li class="nav-item"><Link to="/AddClient" class="nav-link text-dark font-italic bg-light"><i class="bi bi-plus-square"></i> &nbsp; &nbsp; &nbsp; New Client</Link></li>
+                <li class="nav-item sidebar"><Link to="/" class="nav-link font-italic" style={{color: "white"}}><i class="bi bi-list-ul"></i> &nbsp; &nbsp; All Clients</Link></li>
+                <li class="nav-item"><Link to="/AddClient" class="nav-link text-dark font-italic bg-light"><i class="bi bi-plus-square"></i> &nbsp; &nbsp; New Client</Link></li>
                 </ul>
             </div>
             </div>
