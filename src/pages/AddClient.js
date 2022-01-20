@@ -6,10 +6,44 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
-    
+    createClientHeaderContainer: {
+        background:"white",
+        height:"7rem",
+        width:"84vw",
+        display: "flex",
+        flexDirection: "column",
+        [theme.breakpoints.down('sm')]: {
+            height: "10rem"
+        }
+    },
+    createClientParagraph: {
+        marginLeft:"2rem",
+        color:"gray"
+    },
+    createClientDiv: {
+        display:"flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: "1rem",
+        position: "relative",
+        padding: "0 2rem",
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column",
+            margin: "0"
+        }
+    },
+    createClientMainParagraph: {
+        fontSize: "25px", 
+        fontWeight:"bold",
+    },
+    createClientDivSeparator: {
+        fontSize: "25px", 
+        fontWeight:"bold",
+    }
 }))
 
 const AddClient = () => {
+    const classes = useStyles();
     const [req, setReq] = useState({
         operator_id: '',
         provider_id: '',
@@ -63,23 +97,23 @@ const AddClient = () => {
             <div class="col-2">
             <div class="vertical-nav bg-white" id="sidebar">
                 <ul class="nav flex-column bg-white mb-0">
-                <li class="nav-item sidebar"><Link to="/" class="nav-link font-italic" style={{color: "white"}}><i class="bi bi-list-ul"></i> &nbsp; &nbsp; All Clients</Link></li>
-                <li class="nav-item"><Link to="/AddClient" class="nav-link text-dark font-italic bg-light"><i class="bi bi-plus-square"></i> &nbsp; &nbsp; New Client</Link></li>
+                <li class="nav-item"><Link to="/" class="nav-link text-dark font-italic"><i class="bi bi-list-ul"></i> &nbsp; &nbsp; All Clients</Link></li>
+                <li class="nav-item sidebar"><Link to="/AddClient" class="nav-link font-italic text-light"><i class="bi bi-plus-square"></i> &nbsp; &nbsp; New Client</Link></li>
                 </ul>
             </div>
             </div>
 
-            <div class="col-10" >
+            <div class="col-10" style={{padding: "0rem"}}>
                     
-                <div  style={{background:"white",height:"7rem",width:"85rem"}}>
-                    <p><Link style={{marginLeft:"2rem",color:"gray"}} to="/"> Clients </Link> &nbsp; / &nbsp; Create client</p>
+                <div  className={classes.createClientHeaderContainer}>
+                    <p><Link className={classes.createClientParagraph} to="/"> Clients </Link> &nbsp; / &nbsp; Create client</p>
 
 
 
-                    <div style = {{display:"flex",flexDirection:"row"}}>
-                    <p style={{fontSize: "25px" , fontWeight:"bold",marginLeft:"2rem" ,marginTop:"1rem"}}> <i class="bi bi-arrow-left"></i> &nbsp;&nbsp;Create Client</p>
+                    <div className={classes.createClientDiv}>
+                    <p className={classes.createClientMainParagraph}> <i class="bi bi-arrow-left"></i> &nbsp;&nbsp;Create Client</p>
                     
-                    <div style={{fontSize: "25px" ,marginTop:"1rem", fontWeight:"bold",float:"right" ,marginLeft:"50rem" ,display:"flex",flexDirection:"row"}}>  
+                    <div className={classes.createClientDivSeparator}>  
                     <button type="button" class="btn btn-outline"> &nbsp;Cancel</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="submit" class="btn btn-success" onClick={handleSubmit }> &nbsp;Create</button>
