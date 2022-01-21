@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import {makeStyles} from "@mui/styles";
 
 import React, {useState} from 'react';
@@ -12,8 +11,9 @@ const useStyles = makeStyles((theme) => ({
         width:"84vw",
         display: "flex",
         flexDirection: "column",
-        [theme.breakpoints.down('sm')]: {
-            height: "10rem"
+        [theme.breakpoints.down('md')]: {
+            height: "10rem",
+            width: "100vw"
         }
     },
     createClientParagraph: {
@@ -39,6 +39,63 @@ const useStyles = makeStyles((theme) => ({
     createClientDivSeparator: {
         fontSize: "25px", 
         fontWeight:"bold",
+    },
+    formContainer: {
+        background:"white",
+        marginTop:"2%",
+        marginLeft:"1%",
+        height:"40rem",
+        width:"84rem",
+        display:"flex",
+        flexDirection:"row",
+        [theme.breakpoints.down("lg")]: {
+            height: "140%",
+            width: "100vw",
+          justifyContent: "center"
+        }
+    },
+    formHolder: {
+        marginLeft:"3%" ,
+        marginTop:"2%",
+        // margin: "4rem"
+    },
+    formParagraph: {
+        fontSize: "25px",
+        fontWeight:"bold",
+        color:"#03A9F4"
+    },
+    formContentHolder: {
+        display:"flex", 
+        flexDirection: "row",
+        [theme.breakpoints.down('lg')]: {
+            flexDirection: "column",
+            
+        }
+    },
+    formContentSqeezer: {
+        display: "flex",
+        flexDirection: "row",
+        [theme.breakpoints.down("md")]: {
+            flexDirection: "column",
+            
+        }
+    },
+    parser: {
+        [theme.breakpoints.down('md')]: {
+            marginTop: "1rem"
+        }
+    },
+    widthIncreaser: {
+        [theme.breakpoints.down("md")]: {
+            width: "50vw"
+        }
+    },
+    shrinkConditions: {
+        padding: "0rem",
+        width: "83.3333%",
+        [theme.breakpoints.down('md')]: {
+            width: "100%"
+        }
     }
 }))
 
@@ -58,9 +115,8 @@ const AddClient = () => {
         service_code_campaign: '',
         service_code:'',
         client_id:'26'
-    })
-
-
+    });
+    
     const handleChange = (e) => {
         setReq({ ...req, [e.target.name]: e.target.value })
         console.log(req)
@@ -89,6 +145,8 @@ const AddClient = () => {
 
     }
 
+    
+    
 
   return (
     <div className="clientbg">
@@ -103,8 +161,8 @@ const AddClient = () => {
             </div>
             </div>
 
-            <div class="col-10" style={{padding: "0rem"}}>
-                    
+                    <div className={classes.shrinkConditions}>
+            <div class="col-10">
                 <div  className={classes.createClientHeaderContainer}>
                     <p><Link className={classes.createClientParagraph} to="/"> Clients </Link> &nbsp; / &nbsp; Create client</p>
 
@@ -120,22 +178,23 @@ const AddClient = () => {
                     
                     
                     </div>
-
+                    </div>
                     </div>
                    
                 </div>
-                <div  style={{background:"white",marginTop:"2%",marginLeft:"1%" ,height:"40rem",width:"84rem",display:"flex",flexDirection:"row"}}>
-                    <div style={{marginLeft:"3%" ,marginTop:"2%"}}> 
+                <div  className={classes.formContainer}>
+                    <div className={classes.formHolder}> 
 
                     <form onSubmit={handleSubmit}>
         
 
-    <div style ={{display:"flex",flexDirection:"row"}}>
+    <div className={classes.formContentHolder}>
         
-        <div className="col-9">
-            <p style={{fontSize: "25px" , fontWeight:"bold",color:"#03A9F4"}}> Client info</p>
+        <div className="col-9" style={{width: "50vw"}}>
+            <p className={classes.formParagraph}> Client info</p>
 
-            <div className="form-row" style ={{display:"flex",flexDirection:"row"}}>
+            <div className="form-row">
+            <div className={classes.formContentSqeezer}>
             <div className="form-group col-md-5">
                 <label htmlFor="inputEmail4">Subscription key </label>
                 <input type="text" className="form-control" name="subscriptionkey" onChange={handleChange}  placeholder=""  />
@@ -144,7 +203,7 @@ const AddClient = () => {
             </div>
                         
             <div className="form-group col-md-5">
-            <label htmlFor="inputPassword4">Status</label>
+            <label htmlFor="inputPassword4" className={classes.parser}>Status</label>
             <br></br>
                 
             <label class="switch">
@@ -152,12 +211,13 @@ const AddClient = () => {
             <span class="slider round"></span>
             </label>
 
-               
+            </div>
             </div>
             </div>
             
             <br></br>
-            <div className="form-row" style ={{display:"flex",flexDirection:"row"}}>
+            <div className="form-row">
+            <div className={classes.formContentSqeezer}>
             <div className="form-group col-md-5">
                 <label htmlFor="inputEmail4">Operator</label>
                 <input type="text" className="form-control" name="operator_id" onChange={handleChange}  placeholder="" />
@@ -166,18 +226,19 @@ const AddClient = () => {
             </div>
                         
             <div className="form-group col-md-5">
-                <label htmlFor="inputPassword4">Provider</label>
+                <label htmlFor="inputPassword4" className={classes.parser}>Provider</label>
                 <input type="text" className="form-control" name="provider_id"  onChange={handleChange}  placeholder=""  />
             </div>
             </div>
+            </div>
 
 
             <br></br>
             <br></br>
-            <p style={{fontSize: "25px" , fontWeight:"bold",color:"#03A9F4"}}> Configuration</p>
+            <p className={classes.formParagraph}> Configuration</p>
 
             <div className="form-row" style ={{display:"flex",flexDirection:"row"}}>
-            <div className="form-group col-md-11">
+            <div className="form-group col-md-11" style={{width: "50vw"}}>
                 <label htmlFor="inputEmail4">Subscription key </label>
                 <input type="text" className="form-control" name="subscriptionkey"  onChange={handleChange} placeholder=""  />
             </div>
@@ -186,6 +247,7 @@ const AddClient = () => {
             
             <br></br>
             <div className="form-row" style ={{display:"flex",flexDirection:"row"}}>
+                <div className={classes.formContentSqeezer} style={{width: "50vw"}}>
             <div className="form-group col-md-3">
                 <label htmlFor="inputEmail4">Short code</label>
                 <input type="text" className="form-control" name="short_code" onChange={handleChange}  placeholder="" />
@@ -204,11 +266,13 @@ const AddClient = () => {
                 <input type="text" className="form-control" name="gracedays" onChange={handleChange} placeholder=""  />
             </div>
             </div>
+            </div>
             
             <br></br>
 
-            <br></br>
+            
             <div className="form-row" style ={{display:"flex",flexDirection:"row"}}>
+                <div className={classes.formContentSqeezer} style={{width: "50vw"}}>
             <div className="form-group col-md-3">
                 <label htmlFor="inputEmail4">Service Code</label>
                 <input type="text" className="form-control" name="service_code" onChange={handleChange} placeholder="" />
@@ -227,6 +291,7 @@ const AddClient = () => {
                 <input type="text" className="form-control" name="pinflow" onChange={handleChange} placeholder=""  />
             </div>
             </div>
+            </div>
             
             
         </div>
@@ -235,8 +300,9 @@ const AddClient = () => {
         
 
         <div className="col-3" style={{marginLeft:"0rem"}}>
-                <p style={{fontSize: "25px" , fontWeight:"bold",color:"#03A9F4"}}> Package</p>
-                <div className="form-row" >
+                <p className={classes.formParagraph}> Package</p>
+                <div className={classes.widthIncreaser}>
+                <div className="form-row">
             <div className="form-group col-md-12">
                 <label htmlFor="inputEmail4">Type</label>
                 <input type="text" className="form-control" id="inputEmail4" placeholder="" />
@@ -250,6 +316,7 @@ const AddClient = () => {
             <div className="form-group col-md-12">
                 <label htmlFor="inputPassword4">Recurrence Days</label>
                 <input type="text" className="form-control" id="inputPassword4" placeholder="" />
+            </div>
             </div>
         </div>
 
