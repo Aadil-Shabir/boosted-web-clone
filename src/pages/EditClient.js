@@ -72,7 +72,8 @@ const useStyles = makeStyles((theme) => ({
 
 const EditClient = () => {
     const classes = useStyles();
-    const [loa, setL] = useState(true)
+    const [loa, setL] = useState(true);
+    const [operator, setOperator] = useState("");
 
     const clientid = useParams();
     const [sdata,setdata] = useState({
@@ -125,27 +126,40 @@ const EditClient = () => {
 
 
     // useEffect( () => {
+    //     setL(true)
     //     fetch(`http://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
     //         .then(result => result.json())
-    //         .then(data => setdata(data))
+    //         .then(data => {
+    //             setdata(data.payload.client.fields)
+               
+    //             const bii = data.payload.all_operators.find((ao) => ao.id === data.payload.client.fields.operator)
+    //             console.log(bii)
+    //             // setOperator(res.data.payload.all)
+    //             // console.log(sdata)
+    //             setL(false)
+                    
+                
+    //         })
            
     // }, []);
 
     useEffect(() => {
+        let operator_id = 0;
         try {
             setL(true)
             axios.get(`https://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
             .then(res => {
                 setdata(res.data.payload.client.fields)
-                console.log("this")
-                console.log(sdata)
+                operator_id = res.data.payload.client.fields.operator
+                console.log(operator_id)
+                console.log(res.data.payload.all_operators.find((bi) => bi.id === operator_id))
                 setL(false)
             })
         } catch (error) {
             console.log(error)
         }
     }, [])
-    
+
     console.log(loa);
     
     return (
