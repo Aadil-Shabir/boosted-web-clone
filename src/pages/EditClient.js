@@ -73,7 +73,10 @@ const useStyles = makeStyles((theme) => ({
 const EditClient = () => {
     const classes = useStyles();
     const [loa, setL] = useState(true);
+    const [operator_id, setOperator_id] = useState(0);
+    // const [provider_id, setProvider_id] = useState(0);
     const [operator, setOperator] = useState("");
+    // const [provider, setProvider] = useState("");
 
     const clientid = useParams();
     const [sdata,setdata] = useState({
@@ -144,21 +147,36 @@ const EditClient = () => {
     // }, []);
 
     useEffect(() => {
-        let operator_id = 0;
         try {
             setL(true)
             axios.get(`https://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
             .then(res => {
                 setdata(res.data.payload.client.fields)
-                operator_id = res.data.payload.client.fields.operator
-                console.log(operator_id)
-                console.log(res.data.payload.all_operators.find((bi) => bi.id === operator_id))
+                setOperator_id(res.data.payload.client.fields.operator)
+                // setProvider_id(res.data.payload.client.fields.provider)
                 setL(false)
             })
         } catch (error) {
             console.log(error)
         }
     }, [])
+
+    useEffect(() => {
+        axios.get("https://dev.digitalizehub.com/api/admin/operators")
+        .then(res => {
+            const operatorName = res.data.payload.all_operators.find((ao) => ao.id === operator_id)
+            setOperator(operatorName.name);
+        })
+    }, [operator_id])
+
+    // useEffect(() => {
+    //     axios.get(`https://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
+    //     .then(res => {
+    //         const providerName = res.data.payload.all_providers.find((ao) => ao.id === provider_id)
+    //         console.log(providerName)
+    //         setProvider(providerName.name)
+    //     })
+    // }, [provider_id])
 
     console.log(loa);
     
@@ -209,7 +227,7 @@ const EditClient = () => {
                     <div  className={classes.formContainer}>
                         <div className={classes.formHolder}> 
                         
-                        <ClientForm sdata={sdata} />
+                        <ClientForm sdata={sdata} operator={operator}/>
     
                         </div>
                     </div>

@@ -84,7 +84,7 @@ const ClientForm  = (props) => {
                 <div className={classes.formContentSqeezer}>
             <div className="form-group col-md-5">
                 <label htmlFor="inputEmail4">Operator</label>
-                <input type="text" className="form-control" id="inputEmail4" placeholder="" defaultValue= {props.sdata.operator}/>
+                <input type="text" className="form-control" id="inputEmail4" placeholder="" defaultValue= {props.operator}/>
             </div>
             <div className="form-group col-md-1">
             </div>

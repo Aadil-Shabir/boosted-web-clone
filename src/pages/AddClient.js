@@ -103,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AddClient = () => {
     const classes = useStyles();
+    const [operator, setOperator] = useState("");
     const [req, setReq] = useState({
         operator_id: '',
         provider_id: '',
@@ -205,7 +206,7 @@ const AddClient = () => {
                 <div  className={classes.formContainer}>
                     <div className={classes.formHolder}> 
 
-                    <ClientForm sdata={sdata} />
+                    <ClientForm sdata={sdata} operator={operator} />
 
                                        
                     </div>
