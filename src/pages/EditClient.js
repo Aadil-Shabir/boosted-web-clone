@@ -158,8 +158,8 @@ const EditClient = () => {
     useEffect(() => {
         axios.get(`https://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
         .then((res) => {
-            setPackageData(res.data.payload.packages[0])
-            console.log(res.data.payload.packages[0])
+            setPackageData(res.data.payload.packages[0] ? res.data.payload.packages[0] : res.data.payload.packages)
+            console.log(res.data.payload)
         })
     }, [])
 

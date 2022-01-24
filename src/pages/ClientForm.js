@@ -169,7 +169,7 @@ const ClientForm  = (props) => {
                 <div className="form-row" >
             <div className="form-group col-md-12">
                 <label htmlFor="inputEmail4">Type</label>
-                <input type="text" className="form-control" id="inputEmail4" placeholder="" defaultValue={props.packageData.name} />
+                <input type="text" className="form-control" id="inputEmail4" placeholder="" defaultValue={props.packageData.name ? props.packageData.name : "" } />
             </div>
             &nbsp; &nbsp;&nbsp; &nbsp;
             <div className="form-group col-md-12">
