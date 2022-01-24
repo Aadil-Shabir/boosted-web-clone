@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 import axios from 'axios'
 
@@ -106,8 +106,50 @@ const Operator = () => {
     const classes = useStyles()
     const opCtx = useContext(OperatorContext)
 
+    const gridRef = useRef(null);
+  const [gridOptions, setGridOptions] = useState();
     const [rowData, setRowData] = useState([]);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+
+    const columnDefs = [
+        {
+          headerName: "ID",
+          field: "id",
+          checkboxSelection:true,
+          maxWidth: 50
+        },
+        {
+          headerName: "name",
+          field: "name",
+        },
+        {
+          headerName: "country",
+          field: "country",
+        },
+        {
+          headerName: "code",
+          field: "code",
+        },
+      ];
+
+    const defaultColumnDefs = {
+        filter: "agTextColumnFilter",
+        sortable: true,
+        resizable: true,
+    
+      };
+    
+      const onGridReady = (params) => {
+        params.api.sizeColumnsToFit();
+        setGridOptions(params.api);
+        window.addEventListener('resize', function () {
+            setTimeout(function () {
+              params.api.sizeColumnsToFit();
+            });
+          });
+      
+      
+      };
 
 useEffect(() => {
     try {
@@ -116,6 +158,7 @@ useEffect(() => {
         .then(res => {
             setLoading(false)
             setRowData(res.data.payload.all_operators)
+            console.log(rowData)
         })
     } catch (error) {
         console.log(error)
@@ -161,8 +204,22 @@ return (
                     <div className="ag-theme-alpine">
                         <div className={classes.dataContainer}>
            <AgGridReact
+               rowHeight={40}
+               style={{ width: "100%", height: "100%;" }}
+              onGridReady={onGridReady}
+              columnDefs={columnDefs}
+              defaultColDef={defaultColumnDefs}
+              animateRows={true}
+               onRowClicked={rowClickHandler}
+               ref={gridRef}
+               
                rowData={rowData}
-               onRowClicked={rowClickHandler}>
+               rowSelection="single"
+               pagination={true}
+               paginationPageSize={10}
+               paginationNumberFormatter={function (params) {
+                 return '[' + params.value.toLocaleString() + ']';
+               }}>
                <AgGridColumn field="id" sortable={true} filter={true} checkboxSelection={true}></AgGridColumn>
                <AgGridColumn field="name" sortable={true} filter={true}></AgGridColumn>
                <AgGridColumn field="country" sortable={true} filter={true}></AgGridColumn>
