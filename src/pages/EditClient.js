@@ -93,8 +93,12 @@ const EditClient = () => {
         service_code_campaign: '',
         service_code:'',
         client_id:'26'
-        
-        
+    });
+    const [packageData, setPackageData] = useState({
+        id: 0,
+        name: "",
+        price: "",
+        recurrence_days: ""
     })
 
     const handleChange = (e) => {
@@ -126,34 +130,15 @@ const EditClient = () => {
     }
 
 
-
-
-    // useEffect( () => {
-    //     setL(true)
-    //     fetch(`http://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
-    //         .then(result => result.json())
-    //         .then(data => {
-    //             setdata(data.payload.client.fields)
-               
-    //             const bii = data.payload.all_operators.find((ao) => ao.id === data.payload.client.fields.operator)
-    //             console.log(bii)
-    //             // setOperator(res.data.payload.all)
-    //             // console.log(sdata)
-    //             setL(false)
-                    
-                
-    //         })
-           
-    // }, []);
-
     useEffect(() => {
         try {
             setL(true)
             axios.get(`https://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
             .then(res => {
                 setdata(res.data.payload.client.fields)
+                // setPackageData(res.data.payload.packages)
                 setOperator_id(res.data.payload.client.fields.operator)
-                // setProvider_id(res.data.payload.client.fields.provider)
+                // console.log(res.data.payload.client.fields)
                 setL(false)
             })
         } catch (error) {
@@ -166,17 +151,18 @@ const EditClient = () => {
         .then(res => {
             const operatorName = res.data.payload.all_operators.find((ao) => ao.id === operator_id)
             setOperator(operatorName.name);
+            // console.log(packageData)
         })
     }, [operator_id])
 
-    // useEffect(() => {
-    //     axios.get(`https://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
-    //     .then(res => {
-    //         const providerName = res.data.payload.all_providers.find((ao) => ao.id === provider_id)
-    //         console.log(providerName)
-    //         setProvider(providerName.name)
-    //     })
-    // }, [provider_id])
+    useEffect(() => {
+        axios.get(`https://dev.digitalizehub.com/api/admin/clients/${clientid.clientid}`)
+        .then((res) => {
+            setPackageData(res.data.payload.packages[0])
+            console.log(res.data.payload.packages[0])
+        })
+    }, [])
+
 
     console.log(loa);
     
@@ -227,7 +213,7 @@ const EditClient = () => {
                     <div  className={classes.formContainer}>
                         <div className={classes.formHolder}> 
                         
-                        <ClientForm sdata={sdata} operator={operator}/>
+                        <ClientForm sdata={sdata} operator={operator} packageData={packageData} />
     
                         </div>
                     </div>
