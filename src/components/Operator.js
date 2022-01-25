@@ -27,7 +27,8 @@ import {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            height: "8rem"
+            height: "8rem",
+            marginLeft: "5rem"
         }
     },
     containerText: {
@@ -69,6 +70,10 @@ import {
         [theme.breakpoints.down('sm')]: {
             background: "none",
             height: "32rem",
+            justifyContent: "flex-start",
+            marginLeft: "0",
+            marginTop: "0",
+            padding: "0"
             // width: "100%"
         }
     },
@@ -81,6 +86,9 @@ import {
     dataContainer: {
         width: 1222,
         height: 400,
+        [theme.breakpoints.down('xl')]: {
+            width: 1100
+        },
         [theme.breakpoints.down('lg')]: {
             width: 750,
             height: 300
@@ -185,10 +193,10 @@ return (
     <div className="clientbg">
         <div className="row">
         
-            <div class="col-2">
+            <div class="col-2 minimizer" style={{display: "flex"}}>
             <div class="vertical-nav bg-white" id="sidebar">
                 <ul class="nav flex-column mb-0">
-                <li class="nav-item sidebar"><Link to="/Operator" class="nav-link text-dark font-italic"><i class="bi bi-list-ul"></i> &nbsp; &nbsp; All Operators</Link></li>
+                <li class="nav-item sidebar"><Link to="/Operator" class="nav-link text-dark font-italic"><i class="bi bi-list-ul sidebar-logo"></i> &nbsp; &nbsp; All Operators</Link></li>
                 </ul>
             </div>
             </div>
